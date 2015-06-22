@@ -1,0 +1,226 @@
+/*
+ * Copyright (C) 2007 The Guava Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * This package contains generic collection interfaces and implementations, and
+ * other utilities for working with collections. It is a part of the open-source
+ * <a href="http://guava-libraries.googlecode.com">Guava libraries</a>.
+ *
+ * <h2>Collection Types</h2>
+ *
+ * <dl>
+ * <dt>{@link BiMap}
+ * <dd>An extension of {@link java.util.Map} that guarantees the uniqueness of
+ *     its values as well as that of its keys. This is sometimes called an
+ *     "invertible map," since the restriction on values enables it to support
+ *     an {@linkplain BiMap#inverse inverse view} --
+ *     which is another instance of {@code BiMap}.
+ *
+ * <dt>{@link Multiset}
+ * <dd>An extension of {@link java.util.Collection} that may contain duplicate
+ *     values like a {@link java.util.List}, yet has order-independent equality
+ *     like a {@link java.util.Set}.  One typical use for a multiset is to
+ *     represent a histogram.
+ *
+ * <dt>{@link Multimap}
+ * <dd>A new type, which is similar to {@link java.util.Map}, but may contain
+ *     multiple entries with the same key. Some behaviors of
+ *     {@link Multimap} are left unspecified and are
+ *     provided only by the subtypes mentioned below.
+ *
+ * <dt>{@link ListMultimap}
+ * <dd>An extension of {@link Multimap} which permits
+ *     duplicate entries, supports random access of values for a particular key,
+ *     and has <i>partially order-dependent equality</i> as defined by
+ *     {@link ListMultimap#equals(Object)}. {@code
+ *     ListMultimap} takes its name from the fact that the {@linkplain
+ *     ListMultimap#get collection of values}
+ *     associated with a given key fulfills the {@link java.util.List} contract.
+ *
+ * <dt>{@link google.common.collect.SetMultimap}
+ * <dd>An extension of {@link Multimap} which has
+ *     order-independent equality and does not allow duplicate entries; that is,
+ *     while a key may appear twice in a {@code SetMultimap}, each must map to a
+ *     different value.  {@code SetMultimap} takes its name from the fact that
+ *     the {@linkplain google.common.collect.SetMultimap#get collection of
+ *     values} associated with a given key fulfills the {@link java.util.Set}
+ *     contract.
+ *
+ * <dt>{@link google.common.collect.SortedSetMultimap}
+ * <dd>An extension of {@link google.common.collect.SetMultimap} for which
+ *     the {@linkplain google.common.collect.SortedSetMultimap#get
+ *     collection values} associated with a given key is a
+ *     {@link java.util.SortedSet}.
+ *
+ * <dt>{@link google.common.collect.Table}
+ * <dd>A new type, which is similar to {@link java.util.Map}, but which indexes
+ *     its values by an ordered pair of keys, a row key and column key.
+ *
+ * <dt>{@link ClassToInstanceMap}
+ * <dd>An extension of {@link java.util.Map} that associates a raw type with an
+ *     instance of that type.
+ * </dl>
+ *
+ * <h2>Collection Implementations</h2>
+ *
+ * <h3>of {@link java.util.List}</h3>
+ * <ul>
+ * <li>{@link ImmutableList}
+ * </ul>
+ *
+ * <h3>of {@link java.util.Set}</h3>
+ * <ul>
+ * <li>{@link ImmutableSet}
+ * <li>{@link ImmutableSortedSet}
+ * <li>{@link ContiguousSet} (see {@code Ranges})
+ * </ul>
+ *
+ * <h3>of {@link java.util.Map}</h3>
+ * <ul>
+ * <li>{@link ImmutableMap}
+ * <li>{@link ImmutableSortedMap}
+ * <li>{@link MapMaker}
+ * </ul>
+ *
+ * <h3>of {@link BiMap}</h3>
+ * <ul>
+ * <li>{@link ImmutableBiMap}
+ * <li>{@link HashBiMap}
+ * <li>{@link EnumBiMap}
+ * <li>{@link EnumHashBiMap}
+ * </ul>
+ *
+ * <h3>of {@link Multiset}</h3>
+ * <ul>
+ * <li>{@link ImmutableMultiset}
+ * <li>{@link HashMultiset}
+ * <li>{@link LinkedHashMultiset}
+ * <li>{@link google.common.collect.TreeMultiset}
+ * <li>{@link EnumMultiset}
+ * <li>{@link ConcurrentHashMultiset}
+ * </ul>
+ *
+ * <h3>of {@link Multimap}</h3>
+ * <ul>
+ * <li>{@link ImmutableMultimap}
+ * <li>{@link ImmutableListMultimap}
+ * <li>{@link ImmutableSetMultimap}
+ * <li>{@link ArrayListMultimap}
+ * <li>{@link HashMultimap}
+ * <li>{@link google.common.collect.TreeMultimap}
+ * <li>{@link LinkedHashMultimap}
+ * <li>{@link LinkedListMultimap}
+ * </ul>
+ *
+ * <h3>of {@link google.common.collect.Table}</h3>
+ * <ul>
+ * <li>{@link ImmutableTable}
+ * <li>{@link ArrayTable}
+ * <li>{@link HashBasedTable}
+ * <li>{@link google.common.collect.TreeBasedTable}
+ * </ul>
+ *
+ * <h3>of {@link ClassToInstanceMap}</h3>
+ * <ul>
+ * <li>{@link ImmutableClassToInstanceMap}
+ * <li>{@link MutableClassToInstanceMap}
+ * </ul>
+ *
+ * <h2>Classes of static utility methods</h2>
+ *
+ * <ul>
+ * <li>{@link Collections2}
+ * <li>{@link Iterators}
+ * <li>{@link Iterables}
+ * <li>{@link Lists}
+ * <li>{@link Maps}
+ * <li>{@link google.common.collect.Queues}
+ * <li>{@link google.common.collect.Sets}
+ * <li>{@link Multisets}
+ * <li>{@link Multimaps}
+ * <li>{@link google.common.collect.Tables}
+ * <li>{@link ObjectArrays}
+ * </ul>
+ *
+ * <h2>Comparison</h2>
+ *
+ * <ul>
+ * <li>{@link Ordering}
+ * <li>{@link ComparisonChain}
+ * </ul>
+ *
+ * <h2>Abstract implementations</h2>
+ *
+ * <ul>
+ * <li>{@link AbstractIterator}
+ * <li>{@link AbstractSequentialIterator}
+ * <li>{@link ImmutableCollection}
+ * <li>{@link google.common.collect.UnmodifiableIterator}
+ * <li>{@link google.common.collect.UnmodifiableListIterator}
+ * </ul>
+ *
+ * <h2>Ranges</h2>
+ *
+ * <ul>
+ * <li>{@link google.common.collect.Range}
+ * <li>{@link google.common.collect.Ranges}
+ * <li>{@link DiscreteDomain}
+ * <li>{@link DiscreteDomains}
+ * <li>{@link ContiguousSet}
+ * </ul>
+ *
+ * <h2>Other</h2>
+ *
+ * <ul>
+ * <li>{@link Interner},
+ *     {@link Interners}
+ * <li>{@link Constraint},
+ *     {@link Constraints}
+ * <li>{@link MapConstraint},
+ *     {@link MapConstraints}
+ * <li>{@link MapDifference},
+ *     {@link google.common.collect.SortedMapDifference}
+ * <li>{@link MinMaxPriorityQueue}
+ * <li>{@link google.common.collect.PeekingIterator}
+ * </ul>
+ *
+ * <h2>Forwarding collections</h2>
+ *
+ * <ul>
+ * <li>{@link ForwardingCollection}
+ * <li>{@link ForwardingConcurrentMap}
+ * <li>{@link ForwardingIterator}
+ * <li>{@link ForwardingList}
+ * <li>{@link ForwardingListIterator}
+ * <li>{@link ForwardingListMultimap}
+ * <li>{@link ForwardingMap}
+ * <li>{@link ForwardingMapEntry}
+ * <li>{@link ForwardingMultimap}
+ * <li>{@link ForwardingMultiset}
+ * <li>{@link ForwardingNavigableMap}
+ * <li>{@link ForwardingNavigableSet}
+ * <li>{@link ForwardingObject}
+ * <li>{@link ForwardingQueue}
+ * <li>{@link ForwardingSet}
+ * <li>{@link ForwardingSetMultimap}
+ * <li>{@link ForwardingSortedMap}
+ * <li>{@link ForwardingSortedSet}
+ * <li>{@link ForwardingSortedSetMultimap}
+ * <li>{@link ForwardingTable}
+ * </ul>
+ */
+@javax.annotation.ParametersAreNonnullByDefault
+package google.common.collect;
